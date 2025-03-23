@@ -2,16 +2,26 @@
 PROJECT_ROOT=$(cd "$(dirname "$0")" && pwd)
 
 # Create a volume if it does not exist
-if ! docker volume inspect project-volume &>/dev/null; then
+VOLUME_NAME="project-volume"
+if ! docker volume inspect $VOLUME_NAME &>/dev/null; then
     docker volume create \
         -d local \
         -o type=none \
         -o o=bind \
         -o device=$PROJECT_ROOT \
-        project-volume
+        $VOLUME_NAME
 fi
 
-# Run and join the dev container
-docker run --rm -it \
-    -v "$PROJECT_ROOT"/:/CppProject \
-    --name cpp-env cpp-env
+# Check if the container is running
+IMAGE_NAME="cpp-env"
+CONTAINER_NAME="cpp-env"
+if ! docker inspect -f '{{.State}}' $CONTAINER_NAME &>/dev/null; then
+    # Run the dev container
+    echo "Starting container: $CONTAINER_NAME"
+    docker run --rm -id \
+        -v "$PROJECT_ROOT"/:/CppProject \
+        --name $IMAGE_NAME $CONTAINER_NAME
+fi
+
+# Join the running container
+docker exec -it $CONTAINER_NAME bash
