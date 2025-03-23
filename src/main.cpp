@@ -1,7 +1,8 @@
-#include <cstdio>
+#include <Logger.hpp>
 
 int main()
 {
-    printf("Hello World!\n");
+    Logger logger;
+    logger.log("hello, world");
     return 0;
 }
