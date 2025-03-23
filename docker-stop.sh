@@ -1,6 +1,5 @@
 #!/bin/bash
-PROJECT_ROOT=$(cd "$(dirname "$0")" && pwd)
+source $(dirname "${0}")/common.inc
 
 # Stop the container and remove it
-CONTAINER_NAME="cpp-env"
-docker stop $CONTAINER_NAME
+docker stop $DOCKER_CONTAINER_NAME
