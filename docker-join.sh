@@ -12,11 +12,10 @@ if ! docker volume inspect $VOLUME_NAME &>/dev/null; then
         $VOLUME_NAME
 fi
 
-# Check if the container is running
+# Start the container it is not running
 IMAGE_NAME="cpp-env"
 CONTAINER_NAME="cpp-env"
 if ! docker inspect -f '{{.State}}' $CONTAINER_NAME &>/dev/null; then
-    # Run the dev container
     echo "Starting container: $CONTAINER_NAME"
     docker run --rm -id \
         -v "$PROJECT_ROOT"/:/CppProject \
