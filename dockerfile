@@ -13,5 +13,9 @@ RUN apt-get -y update && apt-get install -y \
 # Create the project workspace
 WORKDIR /CppProject
 
+# Customize shell
+RUN echo 'export PS1="\u@CppProject:\w# "' >> /root/.bashrc
+RUN echo 'HISTFILE=/CppProject/.bash_history' >> /root/.bashrc
+
 # Default command
 CMD ["bash"]
