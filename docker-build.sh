@@ -2,5 +2,6 @@
 PROJECT_ROOT=$(cd "$(dirname "$0")" && pwd)
 
 # Build the docker image
-docker build -t cpp-env \
+IMAGE_NAME="cpp-env"
+docker build -t $IMAGE_NAME \
     -f $PROJECT_ROOT/docker/dockerfile $PROJECT_ROOT/docker
