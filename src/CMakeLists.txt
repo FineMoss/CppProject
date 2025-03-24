@@ -10,9 +10,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Add libraries
 add_subdirectory(Logger)
 
-# Add includes
-include_directories(${PROJECT_SOURCE_DIR}/Logger)
-
 # Add an executable
 add_executable(MyProject main.cpp)
 
